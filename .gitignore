@@ -1,1 +1,4 @@
-/init.el
+.cask/
+*~
+ac-comphist.dat
+auto-save-list/

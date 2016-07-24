@@ -23,8 +23,8 @@
 
 (require 'yasnippet)
 (setq yas-snippet-dirs
-      '("~/.emacs.d/snippets" ;; personal snippets
-        "~/.emacs.d/yasnippet-snipetts/" ;; the yasmate collection
+      '("~/.emacs.d/plugins/snippets" ;; personal snippets
+        "~/.emacs.d/plugins/yasnippet-snippets/" ;; the yasmate collection
         ))
 (yas-global-mode 1)
 
@@ -74,8 +74,12 @@
 (powerline-default-theme)
 
 (add-to-list 'exec-path (expand-file-name "/opt/go/bin/"))
-(add-to-list 'exec-path (expand-file-name "/home/kazuki/.go/bin/"))
+(add-to-list 'exec-path (expand-file-name "~/.go/bin/"))
 
 (require 'go-mode)
 (require 'go-autocomplete)
 (add-hook 'go-mode-hook 'flycheck-mode)
+
+
+;; c++
+(add-hook 'c++-mode-hook 'flycheck-mode)

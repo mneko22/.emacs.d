@@ -26,3 +26,6 @@
 (depends-on "web-mode")
 (depends-on "yasnippet")
 (depends-on "auto-complete")
+(depends-on "php-mode")
+(depends-on "helm")
+(depends-on "twittering-mode")

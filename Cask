@@ -30,3 +30,4 @@
 (depends-on "php-mode")
 (depends-on "helm")
 (depends-on "twittering-mode")
+(depends-on "markdown-mode")

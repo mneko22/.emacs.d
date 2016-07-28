@@ -31,3 +31,7 @@
 (depends-on "helm")
 (depends-on "twittering-mode")
 (depends-on "markdown-mode")
+(depends-on "go-mode")
+(depends-on "go-autocomplete")
+(depends-on "powerline")
+(depends-on "monokai-theme")

@@ -3,6 +3,8 @@
 (require 'cask "~/.cask/cask.el")
 (cask-initialize)
 
+(load-theme 'monokai t)
+
 (require 'auto-complete)
 (ac-config-default)
 
@@ -67,3 +69,13 @@
 	 ("\\.md\\'" . markdown-mode)
 	 ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
+
+(require 'powerline)
+(powerline-default-theme)
+
+(add-to-list 'exec-path (expand-file-name "/opt/go/bin/"))
+(add-to-list 'exec-path (expand-file-name "/home/kazuki/.go/bin/"))
+
+(require 'go-mode)
+(require 'go-autocomplete)
+(add-hook 'go-mode-hook 'flycheck-mode)

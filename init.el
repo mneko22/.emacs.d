@@ -8,6 +8,9 @@
 (require 'auto-complete)
 (ac-config-default)
 
+(require 'flycheck)
+(global-flycheck-mode)
+
 (require 'magit)
 
 (require 'web-mode)

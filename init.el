@@ -82,7 +82,3 @@
 (require 'go-mode)
 (require 'go-autocomplete)
 (add-hook 'go-mode-hook 'flycheck-mode)
-
-
-;; c++
-(add-hook 'c++-mode-hook 'flycheck-mode)

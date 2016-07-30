@@ -1,8 +1,8 @@
 # .emacs.d
-## Installtion
+## Installation
 
 
 ``` shell
-git clone https://github.com/matsuneko22/.eamcs.d.git
+git clone https://github.com/matsuneko22/.emacs.d.git
 cask install
 ```

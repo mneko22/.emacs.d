@@ -1,6 +1,12 @@
 (setq inhibit-startup-screen t)
 (global-linum-mode t)
-(require 'cask "~/.cask/cask.el")
+
+(cond ((equal system-type 'darwin)
+       (require 'cask "/usr/local/Cellar/cask/0.7.4/cask.el"))
+      ((equal system-type 'gnu/linux)
+       (require 'cask "~/.cask/cask.el")))
+;;(require 'cask "~/.cask/cask.el")
+;;(require 'cask "/usr/local/Cellar/cask/0.7.4/cask.el")
 (cask-initialize)
 
 (load-theme 'monokai t)

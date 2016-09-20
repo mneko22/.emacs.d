@@ -7,7 +7,13 @@
 
 (setq inhibit-startup-screen t)
 (global-linum-mode t)
-(require 'cask "~/.cask/cask.el")
+
+(cond ((equal system-type 'darwin)
+       (require 'cask "/usr/local/Cellar/cask/0.7.4/cask.el"))
+      ((equal system-type 'gnu/linux)
+       (require 'cask "~/.cask/cask.el")))
+;;(require 'cask "~/.cask/cask.el")
+;;(require 'cask "/usr/local/Cellar/cask/0.7.4/cask.el")
 (cask-initialize)
 
 (load-theme 'monokai t)
@@ -44,21 +50,19 @@
 ;;(define-key global-map (kbd "C-l") 'helm-mini)
 
 ;; font-settings
-(set-face-attribute 'default nil
+(cond ((not (equal window-system nil))
+	    ((set-face-attribute 'default nil
 		    :family "Ricty Discord"
                     :height 120)
-
-(set-fontset-font (frame-parameter nil 'font)
-                  'japanese-jisx0208
-                  (cons "Ricty Discord" "iso10646-1"))
-
-(set-fontset-font (frame-parameter nil 'font)
-                  'japanese-jisx0212
-                  (cons "Ricty Discord" "iso10646-1"))
-
-(set-fontset-font (frame-parameter nil 'font)
-		  'katakana-jisx0201
-                  (cons "Ricty Discord" "iso10646-1"))
+	     (set-fontset-font (frame-parameter nil 'font)
+			       'japanese-jisx0208
+			       (cons "Ricty Discord" "iso10646-1"))
+	     (set-fontset-font (frame-parameter nil 'font)
+			       'japanese-jisx0212
+			       (cons "Ricty Discord" "iso10646-1"))
+	     (set-fontset-font (frame-parameter nil 'font)
+			       'katakana-jisx0201
+			       (cons "Ricty Discord" "iso10646-1")))))
 
 (require 'twittering-mode)
 (setq twittering-use-master-password t)

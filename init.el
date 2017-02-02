@@ -1,8 +1,10 @@
-
+;;; package --- Summary
+;;; Commentary:
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
+;;; Code:
 (package-initialize)
 
 (setq inhibit-startup-screen t)
@@ -50,8 +52,7 @@
 ;;(define-key global-map (kbd "C-l") 'helm-mini)
 
 ;; font-settings
-(cond ((not (equal window-system nil))
-	    ((set-face-attribute 'default nil
+(set-face-attribute 'default nil
 		    :family "Ricty Discord"
                     :height 120)
 	     (set-fontset-font (frame-parameter nil 'font)
@@ -62,7 +63,7 @@
 			       (cons "Ricty Discord" "iso10646-1"))
 	     (set-fontset-font (frame-parameter nil 'font)
 			       'katakana-jisx0201
-			       (cons "Ricty Discord" "iso10646-1")))))
+			       (cons "Ricty Discord" "iso10646-1"))
 
 (require 'twittering-mode)
 (setq twittering-use-master-password t)
@@ -93,3 +94,20 @@
 (require 'go-mode)
 (require 'go-autocomplete)
 (add-hook 'go-mode-hook 'flycheck-mode)
+(global-set-key "\C-h" 'delete-backward-char)
+(provide 'init)
+;;;
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (trr yasnippet web-mode use-package twittering-mode smex smartparens projectile prodigy powerline popwin php-mode pallet nyan-mode multiple-cursors monokai-theme markdown-mode magit idle-highlight-mode htmlize helm go-mode go-autocomplete flycheck-cask expand-region exec-path-from-shell drag-stuff))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

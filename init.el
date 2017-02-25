@@ -49,21 +49,6 @@
 (helm-mode 1)
 ;;(define-key global-map (kbd "C-l") 'helm-mini)
 
-;; font-settings
-(cond ((not (equal window-system nil))
-	    ((set-face-attribute 'default nil
-		    :family "Ricty Discord"
-                    :height 120)
-	     (set-fontset-font (frame-parameter nil 'font)
-			       'japanese-jisx0208
-			       (cons "Ricty Discord" "iso10646-1"))
-	     (set-fontset-font (frame-parameter nil 'font)
-			       'japanese-jisx0212
-			       (cons "Ricty Discord" "iso10646-1"))
-	     (set-fontset-font (frame-parameter nil 'font)
-			       'katakana-jisx0201
-			       (cons "Ricty Discord" "iso10646-1")))))
-
 (require 'twittering-mode)
 (setq twittering-use-master-password t)
 (setq twitterring-use-sssl t)
@@ -93,3 +78,5 @@
 (require 'go-mode)
 (require 'go-autocomplete)
 (add-hook 'go-mode-hook 'flycheck-mode)
+
+(keyboard-translate ?\C-h ?\C-?)

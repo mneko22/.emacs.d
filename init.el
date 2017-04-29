@@ -1,22 +1,29 @@
-
+;;; package -- Smarray
+;;; Commentary:
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
-(package-initialize)
+;;; Code:
 
+;; common settings
+(package-initialize)
+(tool-bar-mode 0)
 (setq inhibit-startup-screen t)
 (global-linum-mode t)
 
+;; cask initalize
 (cond ((equal system-type 'darwin)
        (require 'cask "/usr/local/Cellar/cask/0.7.4/cask.el"))
       ((equal system-type 'gnu/linux)
        (require 'cask "~/.cask/cask.el")))
-;;(require 'cask "~/.cask/cask.el")
-;;(require 'cask "/usr/local/Cellar/cask/0.7.4/cask.el")
 (cask-initialize)
 
+;; thme settings
 (load-theme 'monokai t)
+;; power line
+(require 'powerline)
+(powerline-default-theme)
 
 (require 'auto-complete)
 (ac-config-default)
@@ -24,8 +31,11 @@
 (require 'flycheck)
 (global-flycheck-mode)
 
+;; git config
 (require 'magit)
 
+
+;; web-mode
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
@@ -47,19 +57,8 @@
 ;; helm
 (require 'helm-config)
 (helm-mode 1)
-;;(define-key global-map (kbd "C-l") 'helm-mini)
 
-(require 'twittering-mode)
-(setq twittering-use-master-password t)
-(setq twitterring-use-sssl t)
-(setq twittering-icon-mode t)
-(setq twittering-icon-timeline-spec-string
-      '(":replies"
-	":favorites"
-	":retweets_of_me"
-	":home"
-	))
-
+;; markdown-modepp
 (require 'markdown-mode)
 (use-package markdown-mode
   :ensure t
@@ -69,12 +68,10 @@
 	 ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
-(require 'powerline)
-(powerline-default-theme)
 
+;; go-mode
 (add-to-list 'exec-path (expand-file-name "/opt/go/bin/"))
 (add-to-list 'exec-path (expand-file-name "~/.go/bin/"))
-
 (require 'go-mode)
 (require 'go-autocomplete)
 (add-hook 'go-mode-hook 'flycheck-mode)

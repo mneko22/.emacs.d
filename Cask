@@ -35,3 +35,4 @@
 (depends-on "go-autocomplete")
 (depends-on "powerline")
 (depends-on "monokai-theme")
+(depends-on "trr")

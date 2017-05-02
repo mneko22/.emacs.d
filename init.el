@@ -14,7 +14,7 @@
 
 ;; cask initalize
 (cond ((equal system-type 'darwin)
-       (require 'cask "/usr/local/Cellar/cask/0.7.4/cask.el"))
+       (require 'cask "/usr/local/Cellar/cask/0.8.1/cask.el"))
       ((equal system-type 'gnu/linux)
        (require 'cask "~/.cask/cask.el")))
 (cask-initialize)
@@ -46,6 +46,10 @@
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
+;; smarty-mode
+(require 'smarty-mode)
+(add-to-list 'auto-mode-alist '("\\.smarty\\'" . smarty-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\'" . smarty-mode))
 
 (require 'yasnippet)
 (setq yas-snippet-dirs
@@ -84,7 +88,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (0xc yasnippet web-mode use-package twittering-mode trr smex smartparens projectile prodigy powerline popwin php-mode pallet nyan-mode multiple-cursors monokai-theme markdown-mode magit idle-highlight-mode htmlize helm go-mode go-autocomplete flycheck-cask expand-region exec-path-from-shell drag-stuff))))
+    (smarty-mode 0xc yasnippet web-mode use-package twittering-mode trr smex smartparens projectile prodigy powerline popwin php-mode pallet nyan-mode multiple-cursors monokai-theme markdown-mode magit idle-highlight-mode htmlize helm go-mode go-autocomplete flycheck-cask expand-region exec-path-from-shell drag-stuff))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -97,3 +101,13 @@
   "Return the string used to execute the inferior Python process."
   "python3 -i"
   )
+
+;; .logファイルでは自動で auto-revert-tail-mode にする
+(add-to-list 'auto-mode-alist '("\\.log\\'" . auto-revert-tail-mode))
+
+;; ファイル更新やバッファオープン時、自動でカーソルを末尾に移動する
+(defun do-end-of-buffer()
+  (when auto-revert-tail-mode
+    (end-of-buffer)))
+(add-hook 'after-revert-hook 'do-end-of-buffer)
+(add-hook 'find-file-hook 'do-end-of-buffer)

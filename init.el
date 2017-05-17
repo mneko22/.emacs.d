@@ -86,6 +86,13 @@
 (require 'go-autocomplete)
 (add-hook 'go-mode-hook 'flycheck-mode)
 
+;; python mode config
+(require 'python)
+(defun python-shell-parse-command ()
+  "Return the string used to execute the inferior Python process."
+  "python3 -i"
+  )
+
 (keyboard-translate ?\C-h ?\C-?)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -101,11 +108,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
-;; python mode config
-(require 'python)
-(defun python-shell-parse-command ()
-  "Return the string used to execute the inferior Python process."
-  "python3 -i"
-  )
 ;;; init.el ends here

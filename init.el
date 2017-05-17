@@ -25,11 +25,27 @@
 (require 'powerline)
 (powerline-default-theme)
 
+
+;; input support config
+;; autocomplete
 (require 'auto-complete)
 (ac-config-default)
 
+;; flycheck
 (require 'flycheck)
 (global-flycheck-mode)
+
+;; yasnippet
+(require 'yasnippet)
+(setq yas-snippet-dirs
+      '("~/.emacs.d/plugins/snippets/persional/" ;; personal snippets
+        "~/.emacs.d/plugins/snippets/yasnippet" ;; the yasmate collection
+        ))
+(yas-global-mode 1)
+
+;; helm
+(require 'helm-config)
+(helm-mode 1)
 
 ;; git config
 (require 'magit)
@@ -51,16 +67,6 @@
 (add-to-list 'auto-mode-alist '("\\.smarty\\'" . smarty-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\'" . smarty-mode))
 
-(require 'yasnippet)
-(setq yas-snippet-dirs
-      '("~/.emacs.d/plugins/snippets" ;; personal snippets
-        "~/.emacs.d/plugins/yasnippet-snippets/" ;; the yasmate collection
-        ))
-(yas-global-mode 1)
-
-;; helm
-(require 'helm-config)
-(helm-mode 1)
 
 ;; markdown-modepp
 (require 'markdown-mode)
@@ -96,18 +102,10 @@
  ;; If there is more than one, they won't work right.
  )
 
+;; python mode config
 (require 'python)
 (defun python-shell-parse-command ()
   "Return the string used to execute the inferior Python process."
   "python3 -i"
   )
-
-;; .logファイルでは自動で auto-revert-tail-mode にする
-(add-to-list 'auto-mode-alist '("\\.log\\'" . auto-revert-tail-mode))
-
-;; ファイル更新やバッファオープン時、自動でカーソルを末尾に移動する
-(defun do-end-of-buffer()
-  (when auto-revert-tail-mode
-    (end-of-buffer)))
-(add-hook 'after-revert-hook 'do-end-of-buffer)
-(add-hook 'find-file-hook 'do-end-of-buffer)
+;;; init.el ends here

@@ -36,3 +36,5 @@
 (depends-on "monokai-theme")
 (depends-on "trr")
 (depends-on "smarty-mode")
+(depends-on "editorconfig")
+(depends-on "yatex")

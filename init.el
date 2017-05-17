@@ -38,8 +38,8 @@
 ;; yasnippet
 (require 'yasnippet)
 (setq yas-snippet-dirs
-      '("~/.emacs.d/plugins/snippets/persional/" ;; personal snippets
-        "~/.emacs.d/plugins/snippets/yasnippet" ;; the yasmate collection
+      '("~/.emacs.d/plugins/snippets/personal/" ;; personal snippets
+        "~/.emacs.d/plugins/snippets/yasnippet-snippets";; the yasmate collection
         ))
 (yas-global-mode 1)
 

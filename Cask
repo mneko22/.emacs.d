@@ -38,3 +38,4 @@
 (depends-on "smarty-mode")
 (depends-on "editorconfig")
 (depends-on "yatex")
+(depends-on "mastodon")

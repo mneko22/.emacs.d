@@ -28,7 +28,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (mastodon smarty-mode 0xc yasnippet web-mode use-package twittering-mode trr smex smartparens projectile prodigy powerline popwin php-mode pallet nyan-mode multiple-cursors monokai-theme markdown-mode magit idle-highlight-mode htmlize helm go-mode go-autocomplete flycheck-cask expand-region exec-path-from-shell drag-stuff))))
+    (mastodon smarty-mode yasnippet web-mode use-package twittering-mode trr  smartparens projectile powerline popwin php-mode pallet multiple-cursors monokai-theme markdown-mode magit htmlize helm go-mode go-autocomplete flycheck-cask expand-region drag-stuff))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -41,6 +41,17 @@
 ;; power line
 (powerline-default-theme)
 
+;; drag-stuff
+;; metaキー+shiftキー+上or下で行の入れ替えができる
+(drag-stuff-global-mode 1)
+(drag-stuff-define-keys)
+(setq drag-stuff-modifier '(meta shift))
+
+;; 選択範囲を広げる
+(global-set-key (kbd "C-=") 'er/expand-region)
+
+;;カッコがいいかんじになる
+(smartparens-global-mode t)
 
 ;; input support config
 ;; autocomplete

@@ -26,7 +26,7 @@
 (load-theme 'atom-one-dark  t)
 
 ;; show directory tree
-(neotree-toggle)
+(bind-key "C-x C-b" 'neotree-toggle)
 
 ;; drag-stuff
 ;; metaキー+shiftキー+上or下で行の入れ替えができる
@@ -36,6 +36,9 @@
 
 ;; smart parens
 (smartparens-global-mode t)
+
+;; projectile-mode enable
+(projectile-mode)
 
 ;; helm
 (helm-mode 1)

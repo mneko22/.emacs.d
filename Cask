@@ -4,7 +4,7 @@
 
 (depends-on "bind-key")
 (depends-on "cask")
-(depends-on "drag-sxtuff")
+(depends-on "drag-stuff")
 (depends-on "expand-region")
 (depends-on "flycheck")
 (depends-on "flycheck-cask")
@@ -31,5 +31,5 @@
 (depends-on "trr")
 (depends-on "smarty-mode")
 (depends-on "editorconfig")
-(depends-on "yatex")
 (depends-on "mastodon")
+(depends-on "dirtree")

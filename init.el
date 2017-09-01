@@ -21,25 +21,12 @@
       ((equal system-type 'gnu/linux)
        (require 'cask "~/.cask/cask.el")))
 (cask-initialize)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (mastodon smarty-mode yasnippet web-mode use-package twittering-mode trr  smartparens projectile powerline popwin php-mode pallet multiple-cursors monokai-theme markdown-mode magit htmlize helm go-mode go-autocomplete flycheck-cask expand-region drag-stuff))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 
-;; thme settings
-(load-theme 'monokai t)
-;; power line
-(powerline-default-theme)
+;; set theme
+(load-theme 'atom-one-dark  t)
+
+;; show directory tree
+(neotree-toggle)
 
 ;; drag-stuff
 ;; metaキー+shiftキー+上or下で行の入れ替えができる
@@ -47,18 +34,11 @@
 (drag-stuff-define-keys)
 (setq drag-stuff-modifier '(meta shift))
 
-;; 選択範囲を広げる
-(global-set-key (kbd "C-=") 'er/expand-region)
-
-;;カッコがいいかんじになる
+;; smart parens
 (smartparens-global-mode t)
 
-;; input support config
-;; autocomplete
-(ac-config-default)
-
-;; flycheck
-(global-flycheck-mode)
+;; helm
+(helm-mode 1)
 
 ;; yasnippet
 (require 'yasnippet)
@@ -67,12 +47,6 @@
         "~/.emacs.d/plugins/snippets/yasnippet-snippets";; the yasmate collection
         ))
 (yas-global-mode 1)
-
-;; helm
-(helm-mode 1)
-
-;; git config
-
 
 ;; web-mode
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
@@ -83,11 +57,6 @@
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-
-;; smarty-mode
-(add-to-list 'auto-mode-alist '("\\.smarty\\'" . smarty-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl\\'" . smarty-mode))
-
 
 ;; markdown-modepp
 (use-package markdown-mode
@@ -111,4 +80,17 @@
   "python3 -i"
   )
 
-;;; init.el ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("3629b62a41f2e5f84006ff14a2247e679745896b5eaa1d5bcfbc904a3441b0cd" default))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

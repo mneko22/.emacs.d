@@ -23,7 +23,8 @@
 (cask-initialize)
 
 ;; set theme
-(load-theme 'atom-one-dark  t)
+;;(load-theme 'atom-one-dark  t)
+(load-theme 'monokai t)
 
 ;; show directory tree
 (bind-key "C-x C-b" 'neotree-toggle)
@@ -42,6 +43,11 @@
 
 ;; helm
 (helm-mode 1)
+(add-hook 'eshell-mode-hook
+	  #'(lambda ()
+	      (define-key eshell-mode-map
+		(kbd "M-p")
+		'helm-eshell-history)))
 
 ;; yasnippet
 (require 'yasnippet)

@@ -33,3 +33,4 @@
 (depends-on "editorconfig")
 (depends-on "mastodon")
 (depends-on "neotree")
+(depends-on "monokai-theme")

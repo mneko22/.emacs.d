@@ -29,6 +29,9 @@
 ;; show directory tree
 (bind-key "C-x C-b" 'neotree-toggle)
 
+;; load path
+(exec-path-from-shell-initialize)
+
 ;; drag-stuff
 ;; metaキー+shiftキー+上or下で行の入れ替えができる
 (drag-stuff-global-mode 1)

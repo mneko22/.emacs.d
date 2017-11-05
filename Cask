@@ -5,6 +5,7 @@
 (depends-on "bind-key")
 (depends-on "cask")
 (depends-on "drag-stuff")
+(depends-on "exec-path-from-shell")
 (depends-on "expand-region")
 (depends-on "flycheck")
 (depends-on "flycheck-cask")

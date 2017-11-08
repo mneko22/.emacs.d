@@ -23,8 +23,10 @@
 (cask-initialize)
 
 ;; set theme
-;;(load-theme 'atom-one-dark  t)
-(load-theme 'monokai t)
+(cond ((equal window-system 'nil)
+       (load-theme 'monokai t))
+      ((equal window-system 'ns)
+       (load-theme 'atom-one-dark  t)))
 
 ;; show directory tree
 (bind-key "C-x C-b" 'neotree-toggle)

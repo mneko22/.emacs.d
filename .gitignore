@@ -8,6 +8,7 @@ recentf
 session.*
 \#*\#
 games/
-eshell/
 url/
 mastodon.plstore
+eshell/history
+eshell/lastdir

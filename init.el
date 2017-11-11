@@ -31,8 +31,16 @@
 ;; show directory tree
 (bind-key "C-x C-b" 'neotree-toggle)
 
+;; eshell settings
 ;; load path
 (exec-path-from-shell-initialize)
+;; eshell prompt
+(setq eshell-prompt-function(lambda nil
+			      (concat
+			       (propertize (concat (user-login-name)"@"(eshell/pwd))
+					   'face `(:foreground "black" :background "green"))
+			       (propertize " $ " 'face `(:foreground "black" :background "pink")))))
+(setq eshell-highlight-prompt nil)
 
 ;; drag-stuff
 ;; metaキー+shiftキー+上or下で行の入れ替えができる

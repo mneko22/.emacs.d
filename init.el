@@ -26,7 +26,9 @@
 (cond ((equal window-system 'nil)
        (load-theme 'monokai t))
       ((equal window-system 'ns)
-       (load-theme 'atom-one-dark  t)))
+       (load-theme 'atom-one-dark  t))
+      ((equal window-system 'x)
+       (load-theme 'atom-one-dark t)))
 
 ;; show directory tree
 (bind-key "C-x C-b" 'neotree-toggle)
@@ -37,9 +39,9 @@
 ;; eshell prompt
 (setq eshell-prompt-function(lambda nil
 			      (concat
-			       (propertize (concat (user-login-name)"@"(eshell/pwd))
-					   'face `(:foreground "black" :background "green"))
-			       (propertize " $ " 'face `(:foreground "black" :background "pink")))))
+			       (propertize (concat "\s" (user-login-name) "\s") 'face `(:foreground "black" :background "#3b83f7"))
+			       (propertize (concat "\s" (eshell/pwd) "\s") 'face `(:foreground "black" :background "orange"))
+			       (propertize "\s>" 'face `(:foreground "green")) "\s")))
 (setq eshell-highlight-prompt nil)
 
 ;; drag-stuff

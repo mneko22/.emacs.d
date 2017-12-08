@@ -41,8 +41,8 @@
 			      (concat
 			       (propertize (concat "\s" (user-login-name) "\s") 'face `(:foreground "black" :background "#3b83f7"))
 			       (propertize (concat "\s" (eshell/pwd) "\s") 'face `(:foreground "black" :background "orange"))
-			       (propertize "\s>" 'face `(:foreground "green")) "\s")))
-(setq eshell-highlight-prompt nil)
+			       (propertize "\s$" 'face `(:foreground "green")) "\s")))
+;;(setq eshell-highlight-prompt nil)
 
 ;; drag-stuff
 ;; metaキー+shiftキー+上or下で行の入れ替えができる
@@ -81,6 +81,11 @@
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+
+;; xml-config
+(add-to-list 'auto-mode-alist '("\\.launch\\'" . xml-mode))
+(add-to-list 'auto-mode-alist '("\\.urdf\\'"  . xml-mode))
+(add-to-list 'auto-mode-alist '("\\.xacro\\'" . web-mode))
 
 ;; markdown-modepp
 (use-package markdown-mode

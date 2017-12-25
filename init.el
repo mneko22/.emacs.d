@@ -31,7 +31,10 @@
        (load-theme 'atom-one-dark t)))
 
 ;; show directory tree
-(bind-key "C-x C-b" 'neotree-toggle)
+;;(bind-key "C-x C-b" 'neotree-toggle)
+(bind-key "C-x C-b" 'dired-sidebar-toggle-sidebar)
+(setq dired-sidebar-theme 'icons)
+(setq dired-sidebar-theme 'nerd)
 
 ;; eshell settings
 ;; load path
@@ -63,6 +66,7 @@
 	      (define-key eshell-mode-map
 		(kbd "M-p")
 		'helm-eshell-history)))
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
 
 ;; yasnippet
 (require 'yasnippet)
@@ -86,6 +90,10 @@
 (add-to-list 'auto-mode-alist '("\\.launch\\'" . xml-mode))
 (add-to-list 'auto-mode-alist '("\\.urdf\\'"  . xml-mode))
 (add-to-list 'auto-mode-alist '("\\.xacro\\'" . web-mode))
+
+;; org-mode
+(setq open-junk-file-format "~/Documents/org/%Y-%m%d.org")
+(global-set-key "\C-xj" 'open-junk-file)
 
 ;; markdown-modepp
 (use-package markdown-mode
@@ -116,7 +124,10 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("3629b62a41f2e5f84006ff14a2247e679745896b5eaa1d5bcfbc904a3441b0cd" default))))
+    ("3629b62a41f2e5f84006ff14a2247e679745896b5eaa1d5bcfbc904a3441b0cd" default)))
+ '(package-selected-packages
+   (quote
+    (open-junk-file yasnippet web-mode use-package trr smarty-mode smartparens projectile powerline popwin php-mode pallet nyan-mode neotree multiple-cursors monokai-theme mastodon markdown-mode magit idle-highlight-mode htmlize helm go-mode go-autocomplete flycheck-cask expand-region exec-path-from-shell editorconfig drag-stuff dired-sidebar atom-one-dark-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

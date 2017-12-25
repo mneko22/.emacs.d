@@ -33,5 +33,6 @@
 (depends-on "smarty-mode")
 (depends-on "editorconfig")
 (depends-on "mastodon")
-(depends-on "neotree")
 (depends-on "monokai-theme")
+(depends-on "dired-sidebar")
+(depends-on "open-junk-file")

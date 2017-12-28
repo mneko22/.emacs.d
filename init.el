@@ -53,6 +53,9 @@
 (drag-stuff-define-keys)
 (setq drag-stuff-modifier '(meta shift))
 
+;; delete whiltespace
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 ;; smart parens
 (smartparens-global-mode t)
 
@@ -67,6 +70,8 @@
 		(kbd "M-p")
 		'helm-eshell-history)))
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(setq helm-M-x-fuzzy-match t)
 
 ;; yasnippet
 (require 'yasnippet)

@@ -1,10 +1,3 @@
-;;; package -- Smarray
-;;; Commentary:
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-;;; Code:
 
 ;; common settings
 (package-initialize)
@@ -14,6 +7,7 @@
 
 ;; shortcut settings
 (keyboard-translate ?\C-h ?\C-?)
+
 
 ;; cask initalize
 (cond ((equal system-type 'darwin)
@@ -60,7 +54,9 @@
 (smartparens-global-mode t)
 
 ;; projectile-mode enable
-(projectile-mode)
+(projectile-global-mode)
+(setq projectile-completion-system 'helm)
+(helm-projectile-on)
 
 ;; helm
 (helm-mode 1)

@@ -36,3 +36,4 @@
 (depends-on "monokai-theme")
 (depends-on "dired-sidebar")
 (depends-on "open-junk-file")
+(depends-on "helm-projectile")

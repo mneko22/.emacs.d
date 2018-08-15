@@ -1,4 +1,3 @@
-
 ;; common settings
 (package-initialize)
 (tool-bar-mode 0)
@@ -30,15 +29,20 @@
 (setq dired-sidebar-theme 'icons)
 (setq dired-sidebar-theme 'nerd)
 
+;; company-mode
+(global-company-mode)
+(setq company-selection-wrap-around t)
+
 ;; eshell settings
 ;; load path
 (exec-path-from-shell-initialize)
 ;; eshell prompt
-(setq eshell-prompt-function(lambda nil
-			      (concat
-			       (propertize (concat "\s" (user-login-name) "\s") 'face `(:foreground "black" :background "#3b83f7"))
-			       (propertize (concat "\s" (eshell/pwd) "\s") 'face `(:foreground "black" :background "orange"))
-			       (propertize "\s$" 'face `(:foreground "green")) "\s")))
+(setq eshell-prompt-function
+      (lambda nil
+	(concat
+	 (propertize (concat "\s" (user-login-name) "\s") 'face `(:foreground "black" :background "#3b83f7"))
+	 (propertize (concat "\s" (eshell/pwd) "\s") 'face `(:foreground "black" :background "orange"))
+	 (propertize "\s$" 'face `(:foreground "green")) "\s")))
 ;;(setq eshell-highlight-prompt nil)
 
 ;; drag-stuff
@@ -95,6 +99,13 @@
 ;; org-mode
 (setq open-junk-file-format "~/Documents/org/%Y-%m%d.org")
 (global-set-key "\C-xj" 'open-junk-file)
+(add-hook 'org-mode-hook
+	  (lambda ()
+	    (local-set-key "\C-caa" 'org-agenda-list)
+	    (local-set-key "\C-ccat" 'org-todo-list)
+	    (local-set-key "\M-n" 'outline-next-heading)
+	    (local-set-key "\M-p" 'outline-previous-heading)))
+(setq org-agenda-files '("~/Documents/org"))
 
 ;; markdown-modepp
 (use-package markdown-mode
@@ -117,21 +128,3 @@
   "Return the string used to execute the inferior Python process."
   "python3 -i"
   )
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("3629b62a41f2e5f84006ff14a2247e679745896b5eaa1d5bcfbc904a3441b0cd" default)))
- '(package-selected-packages
-   (quote
-    (open-junk-file yasnippet web-mode use-package trr smarty-mode smartparens projectile powerline popwin php-mode pallet nyan-mode neotree multiple-cursors monokai-theme mastodon markdown-mode magit idle-highlight-mode htmlize helm go-mode go-autocomplete flycheck-cask expand-region exec-path-from-shell editorconfig drag-stuff dired-sidebar atom-one-dark-theme))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

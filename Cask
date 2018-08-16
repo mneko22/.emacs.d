@@ -36,3 +36,4 @@
 (depends-on "open-junk-file")
 (depends-on "helm-projectile")
 (depends-on "company")
+(depends-on "vue-mode")

@@ -64,14 +64,18 @@
 
 ;; helm
 (helm-mode 1)
+(global-set-key (kbd "C-x b") 'helm-mini)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "M-s o") 'helm-occur)
 (add-hook 'eshell-mode-hook
-	  #'(lambda ()
+	  (lambda ()
 	      (define-key eshell-mode-map
 		(kbd "M-p")
 		'helm-eshell-history)))
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "M-x") 'helm-M-x)
-(setq helm-M-x-fuzzy-match t)
+(setq helm-M-x-fuzzy-match t
+      helm-recentf-fuzzy-match t
+      helm-buffers-fuzzy-matching t)
 
 ;; yasnippet
 (require 'yasnippet)

@@ -26,8 +26,10 @@
 ;; show directory tree
 ;;(bind-key "C-x C-b" 'neotree-toggle)
 (bind-key "C-x C-b" 'dired-sidebar-toggle-sidebar)
-(setq dired-sidebar-theme 'icons)
 (setq dired-sidebar-theme 'nerd)
+
+;; editor config
+(editorconfig-mode t)
 
 ;; company-mode
 (global-company-mode)
@@ -37,11 +39,15 @@
 ;; load path
 (exec-path-from-shell-initialize)
 ;; eshell prompt
+(defun current-branch()
+  (if (vc-find-root (string-trim (shell-command-to-string "pwd")) ".git")
+      (concat "<" (string-trim (shell-command-to-string "git symbolic-ref --short HEAD")) ">" )))
 (setq eshell-prompt-function
       (lambda nil
 	(concat
 	 (propertize (concat "\s" (user-login-name) "\s") 'face `(:foreground "black" :background "#3b83f7"))
 	 (propertize (concat "\s" (eshell/pwd) "\s") 'face `(:foreground "black" :background "orange"))
+	 (propertize (concat "\s" (current-branch) "\s") 'face `(:foreground "orange" :background "black"))
 	 (propertize "\s$" 'face `(:foreground "green")) "\s")))
 ;;(setq eshell-highlight-prompt nil)
 
@@ -127,7 +133,6 @@
 (add-hook 'go-mode-hook 'flycheck-mode)
 
 ;; python mode config
-(require 'python)
 (defun python-shell-parse-command ()
   "Return the string used to execute the inferior Python process."
   "python3 -i"

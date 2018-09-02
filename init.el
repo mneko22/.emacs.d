@@ -39,16 +39,18 @@
 ;; load path
 (exec-path-from-shell-initialize)
 ;; eshell prompt
+(defun is-repository ()
+  (vc-find-root (string-trim (shell-command-to-string "pwd")) ".git"))
 (defun current-branch()
-  (if (vc-find-root (string-trim (shell-command-to-string "pwd")) ".git")
-      (concat "<" (string-trim (shell-command-to-string "git symbolic-ref --short HEAD")) ">" )))
+  (string-trim (shell-command-to-string "git symbolic-ref --short HEAD")))
 (setq eshell-prompt-function
       (lambda nil
 	(concat
 	 (propertize (concat "\s" (user-login-name) "\s") 'face `(:foreground "black" :background "#3b83f7"))
 	 (propertize (concat "\s" (eshell/pwd) "\s") 'face `(:foreground "black" :background "orange"))
-	 (propertize (concat "\s" (current-branch) "\s") 'face `(:foreground "orange" :background "black"))
-	 (propertize "\s$" 'face `(:foreground "green")) "\s")))
+	 (if (is-repository)
+	     (propertize (concat "<" (current-branch) ">") 'face `(:foreground "orange")))
+	 (propertize "\n\s$" 'face `(:foreground "green")) "\s")))
 ;;(setq eshell-highlight-prompt nil)
 
 ;; drag-stuff
@@ -116,6 +118,8 @@
 	    (local-set-key "\M-n" 'outline-next-heading)
 	    (local-set-key "\M-p" 'outline-previous-heading)))
 (setq org-agenda-files '("~/Documents/org"))
+(setq org-log-done 'time)
+(setq org-enforce-todo-dependencies t)
 
 ;; markdown-modepp
 (use-package markdown-mode

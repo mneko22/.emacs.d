@@ -37,3 +37,8 @@
 (depends-on "helm-projectile")
 (depends-on "company")
 (depends-on "vue-mode")
+(depends-on "lsp-mode")
+(depends-on "company-lsp")
+(depends-on "lsp-javascript-flow")
+(depends-on "lsp-javascript-typescript")
+(depends-on "typescript-mode")

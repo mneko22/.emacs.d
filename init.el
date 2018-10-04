@@ -34,6 +34,7 @@
 ;; company-mode
 (global-company-mode)
 (setq company-selection-wrap-around t)
+(push 'company-lsp company-backends)
 
 ;; eshell settings
 ;; load path
@@ -141,3 +142,8 @@
   "Return the string used to execute the inferior Python process."
   "python3 -i"
   )
+
+;; typescript-mode
+(require 'lsp-javascript-typescript)
+(add-hook 'js-mode-hook #'lsp-javascript-typescript-enable)
+(add-hook 'typescript-mode-hook #'lsp-javascript-typescript-enable)

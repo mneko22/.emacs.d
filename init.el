@@ -1,6 +1,5 @@
 ;; common settings
 (package-initialize)
-(tool-bar-mode 0)
 (setq inhibit-startup-screen t)
 (global-linum-mode t)
 
@@ -22,6 +21,9 @@
        (load-theme 'atom-one-dark  t))
       ((equal window-system 'x)
        (load-theme 'atom-one-dark t)))
+(unless (equal window-system 'nil)
+  (tool-bar-mode 0)
+  (menu-bar-mode 0))
 
 ;; show directory tree
 ;;(bind-key "C-x C-b" 'neotree-toggle)
@@ -65,6 +67,9 @@
 
 ;; smart parens
 (smartparens-global-mode t)
+
+;; git
+(global-git-gutter+-mode)
 
 ;; projectile-mode enable
 (projectile-global-mode)

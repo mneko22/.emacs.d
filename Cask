@@ -40,3 +40,4 @@
 (depends-on "lsp-mode")
 (depends-on "company-lsp")
 (depends-on "typescript-mode")
+(depends-on "git-gutter+")

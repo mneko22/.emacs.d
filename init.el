@@ -142,8 +142,3 @@
   "Return the string used to execute the inferior Python process."
   "python3 -i"
   )
-
-;; typescript-mode
-(require 'lsp-javascript-typescript)
-(add-hook 'js-mode-hook #'lsp-javascript-typescript-enable)
-(add-hook 'typescript-mode-hook #'lsp-javascript-typescript-enable)

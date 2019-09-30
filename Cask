@@ -41,3 +41,4 @@
 (depends-on "company-lsp")
 (depends-on "typescript-mode")
 (depends-on "git-gutter+")
+(depends-on "which-key")

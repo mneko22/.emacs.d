@@ -33,6 +33,10 @@
 ;; editor config
 (editorconfig-mode t)
 
+;; lsp-mode
+(use-package lsp-mode
+  :commands (lsp lsp-deferred))
+
 ;; company-mode
 (global-company-mode)
 (setq company-selection-wrap-around t)
@@ -99,6 +103,11 @@
         ))
 (yas-global-mode 1)
 
+;; which-key
+(require 'which-key)
+(which-key-mode)
+(which-key-setup-side-window-bottom)
+
 ;; web-mode
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
@@ -140,7 +149,9 @@
 ;; go-mode
 (add-to-list 'exec-path (expand-file-name "/opt/go/bin/"))
 (add-to-list 'exec-path (expand-file-name "~/.go/bin/"))
-(add-hook 'go-mode-hook 'flycheck-mode)
+(add-hook 'go-mode-hook #'lsp-deferred)
+
+;; (add-hook 'go-mode-hook 'flycheck-mode)
 
 ;; python mode config
 (defun python-shell-parse-command ()

@@ -2,6 +2,8 @@
 (package-initialize)
 (setq inhibit-startup-screen t)
 (global-linum-mode t)
+(prefer-coding-system 'utf-8)
+(set-default 'buffer-file-coding-system 'utf-8)
 
 ;; shortcut settings
 (keyboard-translate ?\C-h ?\C-?)
@@ -132,9 +134,16 @@
 	    (local-set-key "\C-ccat" 'org-todo-list)
 	    (local-set-key "\M-n" 'outline-next-heading)
 	    (local-set-key "\M-p" 'outline-previous-heading)))
-(setq org-agenda-files '("~/Documents/org"))
+(setq org-directory "~/Documents/org")
+(setq org-agenda-files `("~/Documents/org"))
+(setq org-default-notes-file "notes.org")
 (setq org-log-done 'time)
 (setq org-enforce-todo-dependencies t)
+(define-key global-map "\C-cn" 'org-capture)
+(setq org-capture-templates
+      '(("n" "Note" entry (file+headline "~/Documents/org/notes.org" "Notes")
+         "* %?\nEntered on %U\n %i\n %a")
+        ))
 
 ;; markdown-modepp
 (use-package markdown-mode
@@ -150,6 +159,9 @@
 (add-to-list 'exec-path (expand-file-name "/opt/go/bin/"))
 (add-to-list 'exec-path (expand-file-name "~/.go/bin/"))
 (add-hook 'go-mode-hook #'lsp-deferred)
+(add-hook 'go-mode-hook (lambda ()
+			  (setq tab-width 4)
+			  (setq indent-tabs-mode nil)))
 
 ;; (add-hook 'go-mode-hook 'flycheck-mode)
 

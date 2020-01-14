@@ -42,3 +42,6 @@
 (depends-on "typescript-mode")
 (depends-on "git-gutter+")
 (depends-on "which-key")
+(depends-on "docker")
+(depends-on "docker-compose-mode")
+(depends-on "dockerfile-mode")

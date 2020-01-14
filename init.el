@@ -11,7 +11,7 @@
 
 ;; cask initalize
 (cond ((equal system-type 'darwin)
-       (require 'cask "/usr/local/Cellar/cask/0.8.1/cask.el"))
+       (require 'cask "/usr/local/Cellar/cask/0.8.4/cask.el"))
       ((equal system-type 'gnu/linux)
        (require 'cask "~/.cask/cask.el")))
 (cask-initialize)
@@ -144,6 +144,9 @@
       '(("n" "Note" entry (file+headline "~/Documents/org/notes.org" "Notes")
          "* %?\nEntered on %U\n %i\n %a")
         ))
+(org-babel-do-load-languages 'org-babel-load-languages
+			     '((shell . t)
+			       (python . t)))
 
 ;; markdown-modepp
 (use-package markdown-mode

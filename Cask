@@ -45,3 +45,4 @@
 (depends-on "docker")
 (depends-on "docker-compose-mode")
 (depends-on "dockerfile-mode")
+(depends-on "rust-mode")

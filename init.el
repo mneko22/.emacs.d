@@ -173,3 +173,10 @@
   "Return the string used to execute the inferior Python process."
   "python3 -i"
   )
+
+;; rust-mode
+(require 'rust-mode)
+(add-hook 'rust-mode-hook
+          (lambda () (setq indent-tabs-mode nil)))
+(setq rust-format-on-save t)
+(define-key rust-mode-map (kbd "C-c C-c") 'rust-run)

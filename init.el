@@ -1,6 +1,7 @@
 ;; common settings
-(package-initialize)
 (setq inhibit-startup-screen t)
+(menu-bar-mode -1)
+(tool-bar-mode 0)
 (global-linum-mode t)
 (prefer-coding-system 'utf-8)
 (set-default 'buffer-file-coding-system 'utf-8)
@@ -8,175 +9,72 @@
 ;; shortcut settings
 (keyboard-translate ?\C-h ?\C-?)
 
+;; package manager settings
+(require 'package)
+(add-to-list 'package-archives '("gnu"   . "https://elpa.gnu.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(package-initialize)
 
-;; cask initalize
-(cond ((equal system-type 'darwin)
-       (require 'cask "/usr/local/Cellar/cask/0.8.4/cask.el"))
-      ((equal system-type 'gnu/linux)
-       (require 'cask "~/.cask/cask.el")))
-(cask-initialize)
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(eval-and-compile
+  (setq use-package-always-ensure t
+        use-package-expand-minimally t))
 
-;; set theme
-(cond ((equal window-system 'nil)
-       (load-theme 'monokai t))
-      ((equal window-system 'ns)
-       (load-theme 'atom-one-dark  t))
-      ((equal window-system 'x)
-       (load-theme 'atom-one-dark t)))
-(unless (equal window-system 'nil)
-  (tool-bar-mode 0)
-  (menu-bar-mode 0))
 
-;; show directory tree
-;;(bind-key "C-x C-b" 'neotree-toggle)
-(bind-key "C-x C-b" 'dired-sidebar-toggle-sidebar)
-(setq dired-sidebar-theme 'nerd)
-
-;; editor config
-(editorconfig-mode t)
-
-;; lsp-mode
-(use-package lsp-mode
-  :commands (lsp lsp-deferred))
-
-;; company-mode
-(global-company-mode)
-(setq company-selection-wrap-around t)
-(push 'company-lsp company-backends)
-
-;; eshell settings
-;; load path
-(exec-path-from-shell-initialize)
-;; eshell prompt
-(defun is-repository ()
-  (vc-find-root (string-trim (shell-command-to-string "pwd")) ".git"))
-(defun current-branch()
-  (string-trim (shell-command-to-string "git symbolic-ref --short HEAD")))
-(setq eshell-prompt-function
-      (lambda nil
-	(concat
-	 (propertize (concat "\s" (user-login-name) "\s") 'face `(:foreground "black" :background "#3b83f7"))
-	 (propertize (concat "\s" (eshell/pwd) "\s") 'face `(:foreground "black" :background "orange"))
-	 (if (is-repository)
-	     (propertize (concat "<" (current-branch) ">") 'face `(:foreground "orange")))
-	 (propertize "\n\s$" 'face `(:foreground "green")) "\s")))
-;;(setq eshell-highlight-prompt nil)
-
-;; drag-stuff
-;; metaキー+shiftキー+上or下で行の入れ替えができる
-(drag-stuff-global-mode 1)
-(drag-stuff-define-keys)
-(setq drag-stuff-modifier '(meta shift))
-
-;; delete whiltespace
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-;; smart parens
-(smartparens-global-mode t)
-
-;; git
-(global-git-gutter+-mode)
-
-;; projectile-mode enable
-(projectile-global-mode)
-(setq projectile-completion-system 'helm)
-(helm-projectile-on)
-
-;; helm
-(helm-mode 1)
-(global-set-key (kbd "C-x b") 'helm-mini)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "M-s o") 'helm-occur)
-(add-hook 'eshell-mode-hook
-	  (lambda ()
-	      (define-key eshell-mode-map
-		(kbd "M-p")
-		'helm-eshell-history)))
-(setq helm-M-x-fuzzy-match t
-      helm-recentf-fuzzy-match t
-      helm-buffers-fuzzy-matching t)
-
-;; yasnippet
-(require 'yasnippet)
-(setq yas-snippet-dirs
-      '("~/.emacs.d/plugins/snippets/personal/" ;; personal snippets
-        "~/.emacs.d/plugins/snippets/yasnippet-snippets";; the yasmate collection
-        ))
-(yas-global-mode 1)
-
-;; which-key
-(require 'which-key)
-(which-key-mode)
-(which-key-setup-side-window-bottom)
-
-;; web-mode
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-
-;; xml-config
-(add-to-list 'auto-mode-alist '("\\.launch\\'" . xml-mode))
-(add-to-list 'auto-mode-alist '("\\.urdf\\'"  . xml-mode))
-(add-to-list 'auto-mode-alist '("\\.xacro\\'" . web-mode))
-
-;; org-mode
-(setq open-junk-file-format "~/Documents/org/%Y-%m%d.org")
-(global-set-key "\C-xj" 'open-junk-file)
-(add-hook 'org-mode-hook
-	  (lambda ()
-	    (local-set-key "\C-caa" 'org-agenda-list)
-	    (local-set-key "\C-ccat" 'org-todo-list)
-	    (local-set-key "\M-n" 'outline-next-heading)
-	    (local-set-key "\M-p" 'outline-previous-heading)))
-(setq org-directory "~/Documents/org")
-(setq org-agenda-files `("~/Documents/org"))
-(setq org-default-notes-file "notes.org")
-(setq org-log-done 'time)
-(setq org-enforce-todo-dependencies t)
-(define-key global-map "\C-cn" 'org-capture)
-(setq org-capture-templates
-      '(("n" "Note" entry (file+headline "~/Documents/org/notes.org" "Notes")
-         "* %?\nEntered on %U\n %i\n %a")
-        ))
-(org-babel-do-load-languages 'org-babel-load-languages
-			     '((shell . t)
-			       (python . t)))
-
-;; markdown-modepp
-(use-package markdown-mode
+(use-package doom-themes
   :ensure t
-  :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode)
-	 ("\\.md\\'" . markdown-mode)
-	 ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "multimarkdown"))
+  :init
+  (defvar doom-themes-enable-bold t)    ; if nil, bold is universally disabled
+  (defvar doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  :config
+  (load-theme 'doom-one t)
+  (use-package doom-modeline
+    :ensure t
+    :hook (after-init . doom-modeline-mode)
+    :config
+    (defvar doom-modeline-height 1)
+    (defvar doom-modeline-icon nil)))
 
+(use-package which-key
+  :ensure t
+  :init
+  (defvar which-key-side-window-max-width 0.20)
+  :config
+  (which-key-setup-side-window-right)
+  (which-key-mode))
 
-;; go-mode
-(add-to-list 'exec-path (expand-file-name "/opt/go/bin/"))
-(add-to-list 'exec-path (expand-file-name "~/.go/bin/"))
-(add-hook 'go-mode-hook #'lsp-deferred)
-(add-hook 'go-mode-hook (lambda ()
-			  (setq tab-width 4)
-			  (setq indent-tabs-mode nil)))
+(use-package company
+  :ensure t
+  :hook (after-init . global-company-mode))
 
-;; (add-hook 'go-mode-hook 'flycheck-mode)
+(use-package helm
+  :ensure t
+  :init
+  (defvar helm-M-x-fuzzy-match t)
+  (defvar helm-buffers-fuzzy-matching t)
+  (defvar helm-recentf-fuzzy-match t)
+  :bind
+  (("M-x" . helm-M-x)
+   ("C-x b" . helm-mini)
+   ("C-x C-f" . helm-find-files))
+  :config
+  (helm-mode 1))
+(use-package magit
+  :ensure t
+  :bind (("C-x g" . magit-status)))
+  
+(use-package org
+  :ensure t)
+(use-package go-mode
+  :ensure t
+  :config)
 
-;; python mode config
-(defun python-shell-parse-command ()
-  "Return the string used to execute the inferior Python process."
-  "python3 -i"
-  )
-
-;; rust-mode
-(require 'rust-mode)
-(add-hook 'rust-mode-hook
-          (lambda () (setq indent-tabs-mode nil)))
-(setq rust-format-on-save t)
-(define-key rust-mode-map (kbd "C-c C-c") 'rust-run)
+(use-package ace-jump-mode
+  :init
+  (eval-after-load "ace-jump-mode"
+  '(ace-jump-mode-enable-mark-sync))
+  :bind
+  (("C-c SPC" . ace-jump-mode)
+   ("C-x SPC" . ace-jump-mode-pop-mark)))

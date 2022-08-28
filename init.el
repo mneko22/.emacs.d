@@ -72,9 +72,15 @@
   :config)
 
 (use-package ace-jump-mode
+  :ensure t
   :init
   (eval-after-load "ace-jump-mode"
   '(ace-jump-mode-enable-mark-sync))
   :bind
   (("C-c SPC" . ace-jump-mode)
    ("C-x SPC" . ace-jump-mode-pop-mark)))
+
+(use-package lsp-mode
+  :ensure t
+  :hook (go-mode . lsp-deferred)
+  )

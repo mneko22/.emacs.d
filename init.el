@@ -64,7 +64,9 @@
             (indent-tabs-mode . nil))
   :config
   (defalias 'yes-or-no-p 'y-or-n-p)
-  (keyboard-translate ?\C-h ?\C-?))
+  (keyboard-translate ?\C-h ?\C-?)
+  (setq-default tab-width 2)
+  (setq indent-line-function 'insert-tab))
 
 
 
@@ -100,29 +102,58 @@
     (defvar doom-modeline-height 1)
     (defvar doom-modeline-icon nil)))
 
-(leaf drag-stuff
-  :doc "drag stuff (words, region, lines) around"
-  :ensure t
+
+(leaf toos
   :config
-  (drag-stuff-global-mode)
-  (drag-stuff-define-keys)
-  (setq drag-stuff-modifier '(meta shift)))
+  (leaf drag-stuff
+    :doc "drag stuff (words, region, lines) around"
+    :ensure t
+    :config
+    (drag-stuff-global-mode)
+    (drag-stuff-define-keys)
+    (setq drag-stuff-modifier '(meta shift)))
+  (leaf magit
+    :doc "git client"
+    :ensure t
+  )
+
+  (leaf dashboard
+    :doc "custimize startup screen package"
+    :ensure t
+    :init
+    (dashboard-setup-startup-hook)
+    :config
+    (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
+    (setq dashboard-startup-banner 'logo)))
 
 
-(leaf magit
-  :doc "git client"
-  :ensure t
-)
 
-(leaf dashboard
-  :doc "custimize startup screen package"
-  :ensure t
-  :init
-  (dashboard-setup-startup-hook)
+(leaf lang
   :config
-  (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
-  (setq dashboard-startup-banner 'logo))
-
+  (leaf org
+    :doc "documentation"
+    :ensure t
+    :config
+    (add-hook 'org-mode
+      (lambda () (setq tab-width 2)))
+    )
+  (leaf text
+    :config
+    (add-hook 'text-mode
+      (lambda () (setq tab-width 2)))
+    )
+  (leaf elisp
+    :config
+    (add-hook 'elisp-mode
+      (lambda () (setq tab-width 2)))
+    )
+  (leaf go-mode
+    :ensure t
+    :config
+    (add-hook 'go-mode
+      (lambda () (setq tab-width 2)))
+    )
+  )
 
 
 

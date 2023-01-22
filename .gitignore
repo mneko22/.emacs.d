@@ -3,6 +3,7 @@
 ac-comphist.dat
 auto-save-list/
 yasnippet-snippets/
+el-get/
 kkcrc
 recentf
 session.*
@@ -15,3 +16,4 @@ eshell/lastdir
 projectile-bookmarks.eld
 tramp
 elpa
+*.elc

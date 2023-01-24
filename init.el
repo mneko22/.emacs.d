@@ -60,12 +60,13 @@
             (menu-bar-mode . nil)
             (tool-bar-mode . nil)
             (scroll-bar-mode . nil)
-	    (global-display-line-numbers-mode . t)
+            (global-display-line-numbers-mode . t)
             (indent-tabs-mode . nil))
   :config
   (defalias 'yes-or-no-p 'y-or-n-p)
   (keyboard-translate ?\C-h ?\C-?)
   (setq-default tab-width 2)
+  (setq c-basic-offset 2)
   (setq indent-line-function 'insert-tab))
 
 
@@ -135,25 +136,34 @@
     :ensure t
     :config
     (add-hook 'org-mode
-      (lambda () (setq tab-width 2)))
+      (lambda () (setq tab-width 2))
     )
+  )
   (leaf text
     :config
     (add-hook 'text-mode
-      (lambda () (setq tab-width 2)))
+      (lambda () (setq tab-width 2))
     )
+  )
   (leaf elisp
     :config
     (add-hook 'elisp-mode
-      (lambda () (setq tab-width 2)))
+      (lambda () (setq tab-width 2))
     )
+  )
   (leaf go-mode
     :ensure t
     :config
-    (add-hook 'go-mode
-      (lambda () (setq tab-width 2)))
+    (add-hook 'go-mode-hook
+      (lambda ()
+        (setq go-indent-offset 2)
+        (setq tab-width 2)
+        (setq standard-indent 2)
+        (setq indent-tabs-mode nil)
+      )
     )
   )
+)
 
 
 

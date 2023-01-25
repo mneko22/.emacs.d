@@ -135,20 +135,35 @@
     :doc "documentation"
     :ensure t
     :config
-    (add-hook 'org-mode
+    (add-hook 'org-mode-hook
       (lambda () (setq tab-width 2))
     )
   )
   (leaf text
     :config
-    (add-hook 'text-mode
+    (add-hook 'text-mode-hook
       (lambda () (setq tab-width 2))
     )
   )
   (leaf elisp
     :config
-    (add-hook 'elisp-mode
-      (lambda () (setq tab-width 2))
+    (add-hook 'emacs-lisp-mode-hook
+      (lambda ()
+        (setq indent-tabs-mode nil)
+        (setq tab-width 2)
+        (setq standard-indent 2)
+      )
+    )
+  )
+  (leaf markdown-mode
+    :ensure t
+    :config
+    (add-hook 'markdown-mode-hook
+      (lambda ()
+        (setq indent-tabs-mode nil)
+        (setq tab-width 2)
+        (setq standard-indent 2)
+      )
     )
   )
   (leaf go-mode
@@ -164,7 +179,6 @@
     )
   )
 )
-
 
 
 ;;end of editor setting

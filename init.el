@@ -105,7 +105,7 @@
     (defvar doom-modeline-icon nil)))
 
 
-(leaf toos
+(leaf tools
   :config
   (leaf drag-stuff
     :doc "drag stuff (words, region, lines) around"
@@ -117,6 +117,24 @@
   (leaf magit
     :doc "git client"
     :ensure t
+    )
+  (leaf fido
+    :init
+    (fido-mode t)
+    :config
+    )
+  (leaf ace-window
+    :ensure t
+    :config
+    (global-set-key (kbd "C-x o") 'ace-window)
+    (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+    )
+  (leaf zoom
+    :ensure t
+    :config
+    (zoom-mode t)
+    (custom-set-variables
+     '(zoom-size '(0.618 . 0.618)))
   ))
 
 

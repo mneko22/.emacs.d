@@ -162,13 +162,26 @@
     (add-hook 'org-mode-hook
       (lambda () (setq tab-width 2))
       )
+    (setq org-startup-truncated nil)
     (setq org-directory "~/Org")
     (setq org-default-notes-file "~/notes.org")
     (define-key global-map "\C-cc" 'org-capture)
+    (setq org-agenda-files '("~/Org"))
+    (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
     (setq org-capture-templates
       '(("n" "Note" entry (file+headline "~/Org/notes.org" "Notes")
          "* %?\nEntered on %U\n %i\n %a")
         ))
+    (defun show-org-buffer (file)
+      "Show an org-file FILE on the current buffer."
+      (interactive)
+      (if (get-buffer file)
+          (let ((buffer (get-buffer file)))
+            (switch-to-buffer buffer)
+            (message "%s" file))
+        (find-file (concat "~/Org/" file))))
+    (global-set-key (kbd "C-c o n") '(lambda () (interactive)
+                                     (show-org-buffer "notes.org")))
   )
   (leaf text
     :config

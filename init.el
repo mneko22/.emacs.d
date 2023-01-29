@@ -117,6 +117,8 @@
   (leaf magit
     :doc "git client"
     :ensure t
+    :config
+    (global-set-key (kbd "C-c g") 'magit-status)
     )
   (leaf fido
     :init
@@ -135,8 +137,20 @@
     (zoom-mode t)
     (custom-set-variables
      '(zoom-size '(0.618 . 0.618)))
+    )
+  (leaf avy
+    :ensure t
+    :config
+    (global-set-key (kbd "C-c j c") 'avy-goto-char)
+    (global-set-key (kbd "C-c j w") 'avy-goto-char-2)
+    (global-set-key (kbd "C-c j l") 'avy-goto-line)
+    )
+  (leaf which-key
+    :ensure t
+    :config
+    (which-key-mode t)
+    (which-key-setup-side-window-bottom)
   ))
-
 
 
 (leaf lang

@@ -61,6 +61,7 @@
             (tool-bar-mode . nil)
             (scroll-bar-mode . nil)
             (global-display-line-numbers-mode . t)
+            (inhibit-startup-screen . t)
             (indent-tabs-mode . nil))
   :config
   (defalias 'yes-or-no-p 'y-or-n-p)
@@ -116,16 +117,7 @@
   (leaf magit
     :doc "git client"
     :ensure t
-  )
-
-  (leaf dashboard
-    :doc "custimize startup screen package"
-    :ensure t
-    :init
-    (dashboard-setup-startup-hook)
-    :config
-    (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
-    (setq dashboard-startup-banner 'logo)))
+  ))
 
 
 

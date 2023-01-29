@@ -147,7 +147,14 @@
     :config
     (add-hook 'org-mode-hook
       (lambda () (setq tab-width 2))
-    )
+      )
+    (setq org-directory "~/Org")
+    (setq org-default-notes-file "~/notes.org")
+    (define-key global-map "\C-cc" 'org-capture)
+    (setq org-capture-templates
+      '(("n" "Note" entry (file+headline "~/Org/notes.org" "Notes")
+         "* %?\nEntered on %U\n %i\n %a")
+        ))
   )
   (leaf text
     :config

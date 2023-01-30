@@ -164,9 +164,9 @@
       )
     (setq org-startup-truncated nil)
     (setq org-directory "~/Org")
-    (setq org-default-notes-file "~/notes.org")
+    (setq org-default-notes-file "~/Org/notes.org")
     (define-key global-map "\C-cc" 'org-capture)
-    (setq org-agenda-files '("~/Org"))
+    (setq org-agenda-files '("~/Org" "~/Org/todo"))
     (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
     (setq org-capture-templates
       '(("n" "Note" entry (file+headline "~/Org/notes.org" "Notes")

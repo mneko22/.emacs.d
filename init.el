@@ -35,7 +35,6 @@
   :custom `((custom-file . ,(locate-user-emacs-file "custom.el"))))
 
 
-
 (leaf cus-start
   :doc "define customization properties of builtins"
   :tag "builtin" "internal"
@@ -150,7 +149,15 @@
     :config
     (which-key-mode t)
     (which-key-setup-side-window-bottom)
-  ))
+    )
+  (leaf eglot
+    :ensure t
+    )
+  (leaf company
+    :ensure t
+    :config
+    (add-hook 'after-init-hook 'global-company-mode)
+    ))
 
 
 (leaf lang
@@ -219,6 +226,7 @@
         (setq tab-width 2)
         (setq standard-indent 2)
         (setq indent-tabs-mode nil)
+        (eglot-ensure)
       )
     )
   )

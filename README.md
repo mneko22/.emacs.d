@@ -2,7 +2,8 @@
 
 ## Reqired
 1. emacs v27=<
-2. golsp
+2. [gopls](https://github.com/golang/tools/tree/master/gopls)
+3. [bash-language-server](https://github.com/mads-hartmann/bash-language-server)
 
 ## Installation
 

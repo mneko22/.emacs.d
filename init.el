@@ -118,12 +118,37 @@
     :ensure t
     :config
     (global-set-key (kbd "C-c g") 'magit-status)
-    )
-  (leaf fido
+  )
+;;  (leaf fido
+;;    :init
+;;    (fido-mode t)
+;;    :config
+;;    )
+  (leaf vertico
+    :ensure t
     :init
-    (fido-mode t)
+    (vertico-mode)
     :config
-    )
+    (defun crm-indicator (args)
+    (cons (format "[CRM%s] %s"
+                  (replace-regexp-in-string
+                   "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
+                   crm-separator)
+                  (car args))
+          (cdr args)))
+    (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
+    (setq minibuffer-prompt-properties
+        '(read-only t cursor-intangible t face minibuffer-prompt))
+    (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
+    (setq enable-recursive-minibuffers t)
+  )
+  (leaf projectile
+    :ensure t
+    :init
+    (projectile-mode t)
+    :config
+    (setq projectile-completion-system 'default)
+  )
   (leaf ace-window
     :ensure t
     :config
@@ -222,15 +247,20 @@
     :config
     (add-hook 'go-mode-hook
       (lambda ()
+        ;; 参考:https://groups.google.com/g/golang-nuts/c/c176nKcyoDQ
         (setq go-indent-offset 2)
         (setq tab-width 2)
         (setq standard-indent 2)
         (setq indent-tabs-mode nil)
-        (eglot-ensure)
-      )
-    )
-  )
-)
+        (eglot-ensure))))
+  (leaf sh-mode
+    :config
+    (add-hook 'sh-mode-hook
+              (lambda ()
+                (setq tab-width 2)
+                (setq standard-indent 2)
+                (setq indent-tabs-mode nil)
+                (eglot-ensure)))))
 
 
 ;;end of editor setting

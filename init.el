@@ -178,11 +178,15 @@
   (leaf eglot
     :ensure t
     )
+  (leaf yasnippet
+    :ensure t
+    :config
+    (setq yas-snippet-dirs '("~/.emacs.d/plugins/snippets/yasnippet-snippets/snippets/"))
+    (yas-global-mode t))
   (leaf company
     :ensure t
     :config
-    (add-hook 'after-init-hook 'global-company-mode)
-    ))
+    (add-hook 'after-init-hook 'global-company-mode)))
 
 
 (leaf lang

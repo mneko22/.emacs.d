@@ -181,7 +181,9 @@
   (leaf yasnippet
     :ensure t
     :config
-    (setq yas-snippet-dirs '("~/.emacs.d/plugins/snippets/yasnippet-snippets/snippets/"))
+    (setq yas-snippet-dirs '("~/.emacs.d/plugins/snippets/yasnippet-snippets/snippets/"
+                             "~/.emacs.d/plugins/snippets/personal/"
+                             ))
     (yas-global-mode t))
   (leaf company
     :ensure t

@@ -10,5 +10,6 @@
 ``` shell
 git clone https://github.com/mneko22/.emacs.d.git
 cd .emacs.d
+git submodule update
 emacs --batch -f batch-byte-compile init.el
 ```

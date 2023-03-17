@@ -205,6 +205,8 @@
     (setq org-default-notes-file "~/Org/notes.org")
     (define-key global-map "\C-cc" 'org-capture)
     (setq org-agenda-files '("~/Org" "~/Org/todo"))
+    (setq org-todo-keywords
+      '((sequence "TODO" "DOING" "|" "DONE" "CANCEL")))
     (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
     (setq org-capture-templates
       '(("n" "Note" entry (file+headline "~/Org/notes.org" "Notes")

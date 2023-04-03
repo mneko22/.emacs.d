@@ -103,6 +103,21 @@
     (defvar doom-modeline-height 1)
     (defvar doom-modeline-icon nil)))
 
+(leaf input
+  :config
+  (leaf ddskk
+    :doc "japanese input method"
+    :ensure t
+    :config
+    (setq default-input-method "japanese-skk")
+    (setq skk-delete-implies-kakutei nil)
+    (let ((l-dict
+           (if (eq window-system 'ns)
+           (expand-file-name "~/Library/Application Support/AquaSKK/SKK-JISYO.L")
+         "/usr/share/skk/SKK-JISYO.L")))
+      (if (file-exists-p l-dict)
+          (setq skk-large-jisyo l-dict)))))
+
 
 (leaf tools
   :config

@@ -101,7 +101,12 @@
     :config
     (add-hook 'after-init-hook #'doom-modeline-mode)
     (defvar doom-modeline-height 1)
-    (defvar doom-modeline-icon nil)))
+    (defvar doom-modeline-icon nil))
+  (leaf font
+    :config
+    (add-to-list 'default-frame-alist
+                 '(font . "HackGen"))
+    (set-face-attribute 'default t :font "HackGen")))
 
 (leaf input
   :config

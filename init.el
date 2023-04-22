@@ -244,7 +244,11 @@
             (message "%s" file))
         (find-file (concat "~/Org/" file))))
     (global-set-key (kbd "C-c o n") '(lambda () (interactive)
-                                     (show-org-buffer "notes.org")))
+                                       (show-org-buffer "notes.org")))
+    (leaf org-superstar
+      :ensure t
+      :config
+      (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
   )
   (leaf text
     :config

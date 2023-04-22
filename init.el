@@ -111,13 +111,15 @@
     :config
     (setq default-input-method "japanese-skk")
     (setq skk-delete-implies-kakutei nil)
+    (global-set-key "\C-x\C-j" 'skk-mode)
+    (global-set-key "\C-xj" 'skk-auto-fill-mode)
+    (global-set-key "\C-xt" 'skk-tutorial)
     (let ((l-dict
            (if (eq window-system 'ns)
            (expand-file-name "~/Library/Application Support/AquaSKK/SKK-JISYO.L")
          "/usr/share/skk/SKK-JISYO.L")))
       (if (file-exists-p l-dict)
           (setq skk-large-jisyo l-dict)))))
-
 
 (leaf tools
   :config

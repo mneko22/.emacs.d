@@ -61,7 +61,8 @@
             (scroll-bar-mode . nil)
             (global-display-line-numbers-mode . t)
             (inhibit-startup-screen . t)
-            (indent-tabs-mode . nil))
+            (indent-tabs-mode . nil)
+            (warning-minimum-level . :emergency))
   :config
   (defalias 'yes-or-no-p 'y-or-n-p)
   (keyboard-translate ?\C-h ?\C-?)
@@ -187,9 +188,10 @@
   (leaf avy
     :ensure t
     :config
-    (global-set-key (kbd "C-c j c") 'avy-goto-char)
-    (global-set-key (kbd "C-c j w") 'avy-goto-char-2)
-    (global-set-key (kbd "C-c j l") 'avy-goto-line)
+;;    (global-set-key (kbd "C-i c") 'avy-goto-char)
+;;    (global-set-key (kbd "C-i" w) 'avy-goto-char-2)
+;;    (global-set-key (kbd "C-i  l") 'avy-goto-line)
+      (global-set-key (kbd "C-i") 'avy-goto-char-timer)
     )
   (leaf which-key
     :ensure t
@@ -291,7 +293,13 @@
                 (setq tab-width 2)
                 (setq standard-indent 2)
                 (setq indent-tabs-mode nil)
-                (eglot-ensure)))))
+                (eglot-ensure))))
+  (leaf terraform-mode
+    :ensure t
+    :config
+    (add-hook 'terraform-mode-hook #'outline-minor-mode)
+    (custom-set-variables '(terraform-indent-level 4))
+  ))
 
 
 ;;end of editor setting

@@ -46,7 +46,6 @@
   :bind (("M-ESC ESC" . c/redraw-frame))
   :custom '((create-lockfiles . nil)
             (debug-on-error . nil)
-            (init-file-debug . t)
             (frame-resize-pixelwise . t)
             (enable-recursive-minibuffers . t)
             (history-length . 1000)
@@ -64,10 +63,7 @@
             (indent-tabs-mode . nil))
   :config
   (defalias 'yes-or-no-p 'y-or-n-p)
-  (keyboard-translate ?\C-h ?\C-?)
-  (setq-default tab-width 2)
-  (setq c-basic-offset 2)
-  (setq indent-line-function 'insert-tab))
+  (keyboard-translate ?\C-h ?\C-?))
 
 
 
@@ -123,7 +119,7 @@
 ;;    :init
 ;;    (fido-mode t)
 ;;    :config
-;;    )
+  ;;    )
   (leaf vertico
     :ensure t
     :init
@@ -141,6 +137,12 @@
         '(read-only t cursor-intangible t face minibuffer-prompt))
     (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
     (setq enable-recursive-minibuffers t)
+    (leaf consult
+      :ensure t)
+    (leaf orderless
+      :ensure t
+      :config
+      (setq completion-styles '(orderless)))
   )
   (leaf projectile
     :ensure t
@@ -165,9 +167,7 @@
   (leaf avy
     :ensure t
     :config
-    (global-set-key (kbd "C-c j c") 'avy-goto-char)
-    (global-set-key (kbd "C-c j w") 'avy-goto-char-2)
-    (global-set-key (kbd "C-c j l") 'avy-goto-line)
+    (global-set-key (kbd "C-c j") 'avy-goto-char-2)
     )
   (leaf which-key
     :ensure t
@@ -197,9 +197,7 @@
     :doc "documentation"
     :ensure t
     :config
-    (add-hook 'org-mode-hook
-      (lambda () (setq tab-width 2))
-      )
+    (setq org-indent-indentation-per-level 2)
     (setq org-startup-truncated nil)
     (setq org-directory "~/Org")
     (setq org-default-notes-file "~/Org/notes.org")

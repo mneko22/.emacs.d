@@ -60,7 +60,8 @@
             (scroll-bar-mode . nil)
             (global-display-line-numbers-mode . t)
             (inhibit-startup-screen . t)
-            (indent-tabs-mode . nil))
+            (indent-tabs-mode . nil)
+            (warning-minimum-level . :emergency))
   :config
   (defalias 'yes-or-no-p 'y-or-n-p)
   (keyboard-translate ?\C-h ?\C-?))
@@ -97,8 +98,30 @@
     :config
     (add-hook 'after-init-hook #'doom-modeline-mode)
     (defvar doom-modeline-height 1)
-    (defvar doom-modeline-icon nil)))
+    (defvar doom-modeline-icon nil))
+  (leaf font
+    :config
+    (add-to-list 'default-frame-alist
+                 '(font . "HackGen"))
+    (set-face-attribute 'default t :font "HackGen")))
 
+(leaf input
+  :config
+  (leaf ddskk
+    :doc "japanese input method"
+    :ensure t
+    :config
+    (setq default-input-method "japanese-skk")
+    (setq skk-delete-implies-kakutei nil)
+    (global-set-key "\C-x\C-j" 'skk-mode)
+    (global-set-key "\C-xj" 'skk-auto-fill-mode)
+    (global-set-key "\C-xt" 'skk-tutorial)
+    (let ((l-dict
+           (if (eq window-system 'ns)
+           (expand-file-name "~/Library/Application Support/AquaSKK/SKK-JISYO.L")
+         "/usr/share/skk/SKK-JISYO.L")))
+      (if (file-exists-p l-dict)
+          (setq skk-large-jisyo l-dict)))))
 
 (leaf tools
   :config
@@ -167,7 +190,10 @@
   (leaf avy
     :ensure t
     :config
-    (global-set-key (kbd "C-c j") 'avy-goto-char-2)
+;;    (global-set-key (kbd "C-i c") 'avy-goto-char)
+;;    (global-set-key (kbd "C-i" w) 'avy-goto-char-2)
+;;    (global-set-key (kbd "C-i  l") 'avy-goto-line)
+      (global-set-key (kbd "C-i") 'avy-goto-char-timer)
     )
   (leaf which-key
     :ensure t
@@ -203,6 +229,9 @@
     (setq org-default-notes-file "~/Org/notes.org")
     (define-key global-map "\C-cc" 'org-capture)
     (setq org-agenda-files '("~/Org" "~/Org/todo"))
+    (setq org-todo-keywords
+          '((sequence "TODO" "DOING" "|" "DONE" "CANCEL")))
+    (setq org-log-done 'time)
     (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
     (setq org-capture-templates
       '(("n" "Note" entry (file+headline "~/Org/notes.org" "Notes")
@@ -217,7 +246,11 @@
             (message "%s" file))
         (find-file (concat "~/Org/" file))))
     (global-set-key (kbd "C-c o n") '(lambda () (interactive)
-                                     (show-org-buffer "notes.org")))
+                                       (show-org-buffer "notes.org")))
+    (leaf org-superstar
+      :ensure t
+      :config
+      (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
   )
   (leaf text
     :config
@@ -250,12 +283,8 @@
     :ensure t
     :config
     (add-hook 'go-mode-hook
-      (lambda ()
-        ;; 参考:https://groups.google.com/g/golang-nuts/c/c176nKcyoDQ
-        (setq go-indent-offset 2)
+       (lambda ()
         (setq tab-width 2)
-        (setq standard-indent 2)
-        (setq indent-tabs-mode nil)
         (eglot-ensure))))
   (leaf sh-mode
     :config
@@ -264,7 +293,13 @@
                 (setq tab-width 2)
                 (setq standard-indent 2)
                 (setq indent-tabs-mode nil)
-                (eglot-ensure)))))
+                (eglot-ensure))))
+  (leaf terraform-mode
+    :ensure t
+    :config
+    (add-hook 'terraform-mode-hook #'outline-minor-mode)
+    (custom-set-variables '(terraform-indent-level 4))
+  ))
 
 
 ;;end of editor setting

@@ -14,7 +14,7 @@
   (unless (package-installed-p 'leaf)
     (package-refresh-contents)
     (package-install 'leaf))
-
+  
   (leaf leaf-keywords
     :ensure t
     :init
@@ -164,6 +164,17 @@
         '(read-only t cursor-intangible t face minibuffer-prompt))
     (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
     (setq enable-recursive-minibuffers t)
+    (leaf consult
+      :ensure t
+      :bind
+      ("C-x b" . consult-buffer)
+      ("C-x r b" . consult-bookmark)
+      ("M-y" . consult-yank-pop)
+      ("M-g l" . consult-line))
+    (leaf orderless
+      :ensure t
+      :config
+      (setq completion-styles '(orderless)))
   )
   (leaf projectile
     :ensure t
@@ -174,10 +185,10 @@
   )
   (leaf ace-window
     :ensure t
+    :bind
+    ("C-x o" . ace-window)
     :config
-    (global-set-key (kbd "C-x o") 'ace-window)
-    (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-    )
+    (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
   (leaf zoom
     :ensure t
     :config
@@ -187,6 +198,7 @@
     )
   (leaf avy
     :ensure t
+    :bind
     :config
 ;;    (global-set-key (kbd "C-i c") 'avy-goto-char)
 ;;    (global-set-key (kbd "C-i" w) 'avy-goto-char-2)

@@ -263,6 +263,14 @@
       :ensure t
       :config
       (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
+    (leaf org-journal
+      :ensure t
+      :bind
+      ("C-c j" . org-journal-new-entry)
+      :config
+      (setq org-journal-dir "~/Org/journal")
+      (setq org-journal-date-format "%Y-%m-%d, %A")
+      (setq org-journal-file-format "%Y%m%d.org"))
   )
   (leaf text
     :config

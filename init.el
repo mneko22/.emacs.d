@@ -215,6 +215,13 @@
       (vterm-keymap-exceptions . '("C-c" "C-x" "C-u" "C-g" "C-l" "M-x" "M-o" "C-v" "M-v" "C-y" "M-y"))
     :config))
 
+(defun list-directories (dir)
+  (let ((result '()))
+    (dolist (file (directory-files dir t))
+      (when (and (file-directory-p file)
+                 (not (member (file-name-nondirectory file) '("." ".."))))
+        (push file result)))
+    result))
 
 (leaf lang
   :config
@@ -229,7 +236,8 @@
     (setq org-directory "~/Org")
     (setq org-default-notes-file "~/Org/notes.org")
     (define-key global-map "\C-cc" 'org-capture)
-    (setq org-agenda-files '("~/Org" "~/Org/todo"))
+    ;;(setq org-agenda-files (append '("~/Org") (list-directories "~/Org")))
+    (setq org-agenda-files (directory-files-recursively "~/Org" "org$"))
     (setq org-todo-keywords
           '((sequence "TODO" "DOING" "|" "DONE" "CANCEL")))
     (setq org-log-done 'time)

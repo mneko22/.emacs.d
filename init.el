@@ -219,7 +219,7 @@
     :ensure t
     :custom
       (vterm-keymap-exceptions . '("C-c" "C-x" "C-u" "C-g" "C-l" "M-x" "M-o" "C-v" "M-v" "C-y" "M-y"))
-    :config))
+    :config)
 
 (defun list-directories (dir)
   (let ((result '()))

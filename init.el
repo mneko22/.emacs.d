@@ -127,6 +127,12 @@
     ("C-c g" . magit-status)
     :config
   )
+    )
+  (leaf exec-path-from-shell
+    :ensure t
+    :config
+    (when (memq window-system '(mac ns x))
+      (exec-path-from-shell-initialize)))
 ;;  (leaf fido
 ;;    :init
 ;;    (fido-mode t)

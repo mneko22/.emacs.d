@@ -278,6 +278,13 @@
       (setq org-journal-dir "~/Org/journal")
       (setq org-journal-date-format "%Y-%m-%d, %A")
       (setq org-journal-file-format "%Y%m%d.org"))
+    (leaf org-roam
+      :ensure t
+      :config
+      (setq org-roam-directory (file-truename "~/Org/roam"))
+      (org-roam-db-autosync-mode)
+      (setq org-roam-database-connector 'sqlite-builtin)
+    )
   )
   (leaf text
     :config

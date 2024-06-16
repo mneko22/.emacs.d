@@ -93,39 +93,23 @@
   :config
   (leaf doom-themes
     :ensure t
+    :custom
+    (doom-themes-enable-bold . t)
+    (doom-themes-enable-italic . t)
     :config
-    (defvar doom-themes-enable-bold t)
-    (defvar doom-themes-enable-italic t)
     (load-theme 'doom-one t))
   (leaf doom-modeline
     :ensure t
+    :custom
+    (doom-modeline-height . 1)
+    (doom-modeline-icon . nil)
     :config
-    (add-hook 'after-init-hook #'doom-modeline-mode)
-    (defvar doom-modeline-height 1)
-    (defvar doom-modeline-icon nil))
+    (add-hook 'after-init-hook #'doom-modeline-mode))
   (leaf font
     :config
     (add-to-list 'default-frame-alist
                  '(font . "HackGen"))
     (set-face-attribute 'default t :font "HackGen")))
-
-(leaf input
-  :config
-  (leaf ddskk
-    :doc "japanese input method"
-    :ensure t
-    :config
-    (setq default-input-method "japanese-skk")
-    (setq skk-delete-implies-kakutei nil)
-    (global-set-key "\C-x\C-j" 'skk-mode)
-    (global-set-key "\C-xj" 'skk-auto-fill-mode)
-    (global-set-key "\C-xt" 'skk-tutorial)
-    (let ((l-dict
-           (if (eq window-system 'ns)
-           (expand-file-name "~/Library/Application Support/AquaSKK/SKK-JISYO.L")
-         "/usr/share/skk/SKK-JISYO.L")))
-      (if (file-exists-p l-dict)
-          (setq skk-large-jisyo l-dict)))))
 
 (leaf tools
   :config
@@ -139,9 +123,16 @@
   (leaf magit
     :doc "git client"
     :ensure t
+    :bind
+    ("C-c g" . magit-status)
     :config
-    (global-set-key (kbd "C-c g") 'magit-status)
   )
+    )
+  (leaf exec-path-from-shell
+    :ensure t
+    :config
+    (when (memq window-system '(mac ns x))
+      (exec-path-from-shell-initialize)))
 ;;  (leaf fido
 ;;    :init
 ;;    (fido-mode t)
@@ -197,13 +188,16 @@
      '(zoom-size '(0.618 . 0.618)))
     )
   (leaf avy
+    :custom
+      (avy-timeout-seconds . 10)
     :ensure t
     :bind
+      ("C-:" . avy-goto-char-timer)
     :config
 ;;    (global-set-key (kbd "C-i c") 'avy-goto-char)
 ;;    (global-set-key (kbd "C-i" w) 'avy-goto-char-2)
 ;;    (global-set-key (kbd "C-i  l") 'avy-goto-line)
- ;;     (global-set-key (kbd "C-i") 'avy-goto-char-timer)
+;;     (global-set-key (kbd "C-i") 'avy-goto-char-timer)
     )
   (leaf which-key
     :ensure t
@@ -224,8 +218,20 @@
   (leaf company
     :ensure t
     :config
-    (add-hook 'after-init-hook 'global-company-mode)))
+    (add-hook 'after-init-hook 'global-company-mode))
+  (leaf vterm
+    :ensure t
+    :custom
+      (vterm-keymap-exceptions . '("C-c" "C-x" "C-u" "C-g" "C-l" "M-x" "M-o" "C-v" "M-v" "C-y" "M-y"))
+    :config)
 
+(defun list-directories (dir)
+  (let ((result '()))
+    (dolist (file (directory-files dir t))
+      (when (and (file-directory-p file)
+                 (not (member (file-name-nondirectory file) '("." ".."))))
+        (push file result)))
+    result))
 
 (leaf lang
   :config
@@ -240,7 +246,8 @@
     (setq org-directory "~/Org")
     (setq org-default-notes-file "~/Org/notes.org")
     (define-key global-map "\C-cc" 'org-capture)
-    (setq org-agenda-files '("~/Org" "~/Org/todo"))
+    ;;(setq org-agenda-files (append '("~/Org") (list-directories "~/Org")))
+    (setq org-agenda-files (directory-files-recursively "~/Org" "org$"))
     (setq org-todo-keywords
           '((sequence "TODO" "DOING" "|" "DONE" "CANCEL")))
     (setq org-log-done 'time)

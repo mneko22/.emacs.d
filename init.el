@@ -203,7 +203,7 @@
 ;;    (global-set-key (kbd "C-i c") 'avy-goto-char)
 ;;    (global-set-key (kbd "C-i" w) 'avy-goto-char-2)
 ;;    (global-set-key (kbd "C-i  l") 'avy-goto-line)
-      (global-set-key (kbd "C-i") 'avy-goto-char-timer)
+ ;;     (global-set-key (kbd "C-i") 'avy-goto-char-timer)
     )
   (leaf which-key
     :ensure t

@@ -161,19 +161,12 @@
       ("C-x b" . consult-buffer)
       ("C-x r b" . consult-bookmark)
       ("M-y" . consult-yank-pop)
-      ("M-g l" . consult-line))
+      ("C-s" . consult-line))
     (leaf orderless
       :ensure t
       :config
       (setq completion-styles '(orderless)))
-  )
-  (leaf projectile
-    :ensure t
-    :init
-    (projectile-mode t)
-    :config
-    (setq projectile-completion-system 'default)
-  )
+
   (leaf ace-window
     :ensure t
     :bind

@@ -160,12 +160,17 @@
       ("C-x b" . consult-buffer)
       ("C-x r b" . consult-bookmark)
       ("M-y" . consult-yank-pop)
-      ("C-s" . consult-line))
-    (leaf orderless
-      :ensure t
+      ("C-s" . consult-line)
       :config
-      (setq completion-styles '(orderless))))
-
+      (leaf orderless
+        :ensure t
+        :config
+        (setq completion-styles '(orderless)))
+      (leaf embark
+        :ensure t
+        :config
+        (leaf embark-consult
+          :ensure t))))
   (leaf ace-window
     :ensure t
     :bind

@@ -334,4 +334,9 @@
 
 
 ;;end of editor setting
+;; load local config if exists
+(let ((local-config (locate-user-emacs-file "init-local.el")))
+  (when (file-exists-p local-config)
+    (load local-config)))
+
 (provide 'init)

@@ -17,3 +17,4 @@ projectile-bookmarks.eld
 tramp
 elpa
 *.elc
+init-local.el
